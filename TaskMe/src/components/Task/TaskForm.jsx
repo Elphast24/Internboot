@@ -32,14 +32,12 @@ const TaskForm = ({ onCancel }) => {
         deadline: deadline ? new Date(deadline) : null
       });
 
-      // Reset form
       setTitle('');
       setDescription('');
       setCategory('personal');
       setPriority('medium');
       setDeadline('');
       
-      // Close form if onCancel is provided (for modal usage)
       if (onCancel) onCancel();
     } catch (error) {
       setError('Failed to create task: ' + error.message);
@@ -49,52 +47,46 @@ const TaskForm = ({ onCancel }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4">Add New Task</h2>
+    <form onSubmit={handleSubmit} style={taskFormStyles.form}>
+      <h2 style={taskFormStyles.title}>Add New Task</h2>
       
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+        <div style={taskFormStyles.errorBox}>
           {error}
         </div>
       )}
 
-      <div className="space-y-4">
+      <div style={taskFormStyles.container}>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Title *
-          </label>
+          <label style={taskFormStyles.label}>Title *</label>
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            style={taskFormStyles.input}
             placeholder="What needs to be done?"
             required
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Description
-          </label>
+          <label style={taskFormStyles.label}>Description</label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows="3"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            style={taskFormStyles.textarea}
             placeholder="Add some details..."
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div style={taskFormStyles.gridContainer}>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Category
-            </label>
+            <label style={taskFormStyles.label}>Category</label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              style={taskFormStyles.select}
             >
               <option value="personal">Personal</option>
               <option value="work">Work</option>
@@ -105,13 +97,11 @@ const TaskForm = ({ onCancel }) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Priority
-            </label>
+            <label style={taskFormStyles.label}>Priority</label>
             <select
               value={priority}
               onChange={(e) => setPriority(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              style={taskFormStyles.select}
             >
               <option value="low">Low</option>
               <option value="medium">Medium</option>
@@ -120,24 +110,22 @@ const TaskForm = ({ onCancel }) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Deadline
-            </label>
+            <label style={taskFormStyles.label}>Deadline</label>
             <input
               type="date"
               value={deadline}
               onChange={(e) => setDeadline(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              style={taskFormStyles.input}
             />
           </div>
         </div>
 
-        <div className="flex justify-end space-x-3 pt-4">
+        <div style={taskFormStyles.buttonContainer}>
           {onCancel && (
             <button
               type="button"
               onClick={onCancel}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+              style={taskFormStyles.cancelBtn}
             >
               Cancel
             </button>
@@ -145,7 +133,10 @@ const TaskForm = ({ onCancel }) => {
           <button
             type="submit"
             disabled={loading || !title.trim()}
-            className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50"
+            style={{
+              ...taskFormStyles.submitBtn,
+              opacity: loading || !title.trim() ? 0.5 : 1
+            }}
           >
             {loading ? 'Adding...' : 'Add Task'}
           </button>
@@ -153,6 +144,107 @@ const TaskForm = ({ onCancel }) => {
       </div>
     </form>
   );
+};
+
+const taskFormStyles = {
+  form: {
+    backgroundColor: '#ffffff',
+    padding: '1.5rem',
+    borderRadius: '0.375rem',
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+  },
+  title: {
+    fontSize: '1.875rem',
+    fontWeight: '700',
+    marginBottom: '1rem',
+    margin: 0,
+    color: '#1f2937',
+  },
+  errorBox: {
+    backgroundColor: '#fee2e2',
+    border: '1px solid #fca5a5',
+    color: '#991b1b',
+    padding: '0.75rem 1rem',
+    borderRadius: '0.375rem',
+    marginBottom: '1rem',
+    fontSize: '0.9rem',
+  },
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+  },
+  label: {
+    display: 'block',
+    fontSize: '0.875rem',
+    fontWeight: '500',
+    color: '#374151',
+    marginBottom: '0.25rem',
+  },
+  input: {
+    width: '100%',
+    boxSizing: 'border-box',
+    padding: '0.5rem 0.75rem',
+    border: '1px solid #d1d5db',
+    borderRadius: '0.375rem',
+    fontSize: '0.95rem',
+    fontFamily: 'inherit',
+    transition: 'border-color 0.2s, box-shadow 0.2s',
+  },
+  textarea: {
+    width: '100%',
+    boxSizing: 'border-box',
+    padding: '0.5rem 0.75rem',
+    border: '1px solid #d1d5db',
+    borderRadius: '0.375rem',
+    fontSize: '0.95rem',
+    fontFamily: 'inherit',
+    resize: 'vertical',
+    transition: 'border-color 0.2s, box-shadow 0.2s',
+  },
+  select: {
+    width: '100%',
+    boxSizing: 'border-box',
+    padding: '0.5rem 0.75rem',
+    border: '1px solid #d1d5db',
+    borderRadius: '0.375rem',
+    fontSize: '0.95rem',
+    fontFamily: 'inherit',
+    transition: 'border-color 0.2s, box-shadow 0.2s',
+  },
+  gridContainer: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+    gap: '1rem',
+  },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    gap: '0.75rem',
+    paddingTop: '1rem',
+  },
+  cancelBtn: {
+    padding: '0.5rem 1rem',
+    fontSize: '0.875rem',
+    fontWeight: '500',
+    color: '#4b5563',
+    backgroundColor: '#f3f4f6',
+    border: 'none',
+    borderRadius: '0.375rem',
+    cursor: 'pointer',
+    transition: 'background-color 0.2s',
+  },
+  submitBtn: {
+    padding: '0.5rem 1rem',
+    fontSize: '0.875rem',
+    fontWeight: '500',
+    color: '#ffffff',
+    backgroundColor: '#2c3e50',
+    border: 'none',
+    borderRadius: '0.375rem',
+    cursor: 'pointer',
+    transition: 'background-color 0.2s',
+  },
 };
 
 export default TaskForm;

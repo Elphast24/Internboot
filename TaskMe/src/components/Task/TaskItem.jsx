@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTasks } from '../../context/TaskContext';
+import {Pencil, X} from 'lucide-react'
 
 const TaskItem = ({ task }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -46,22 +47,22 @@ const TaskItem = ({ task }) => {
     }
   };
 
-  const getPriorityColor = (priority) => {
+  const getPriorityStyle = (priority) => {
     switch (priority) {
-      case 'high': return 'bg-red-100 text-red-800';
-      case 'medium': return 'bg-yellow-100 text-yellow-800';
-      case 'low': return 'bg-green-100 text-green-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'high': return { backgroundColor: '#fee2e2', color: '#7f1d1d' };
+      case 'medium': return { backgroundColor: '#fef3c7', color: '#78350f' };
+      case 'low': return { backgroundColor: '#dcfce7', color: '#166534' };
+      default: return { backgroundColor: '#f3f4f6', color: '#374151' };
     }
   };
 
-  const getCategoryColor = (category) => {
+  const getCategoryStyle = (category) => {
     switch (category) {
-      case 'work': return 'bg-blue-100 text-blue-800';
-      case 'personal': return 'bg-purple-100 text-purple-800';
-      case 'health': return 'bg-green-100 text-green-800';
-      case 'education': return 'bg-indigo-100 text-indigo-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'work': return { backgroundColor: '#dbeafe', color: '#1e40af' };
+      case 'personal': return { backgroundColor: '#e9d5ff', color: '#6d28d9' };
+      case 'health': return { backgroundColor: '#dcfce7', color: '#166534' };
+      case 'education': return { backgroundColor: '#e0e7ff', color: '#3730a3' };
+      default: return { backgroundColor: '#f3f4f6', color: '#374151' };
     }
   };
 
@@ -73,13 +74,13 @@ const TaskItem = ({ task }) => {
 
   if (isEditing) {
     return (
-      <div className="bg-white p-4 rounded-lg shadow border-2 border-indigo-200">
-        <form onSubmit={handleSave} className="space-y-3">
+      <div style={taskItemStyles.editingCard}>
+        <form onSubmit={handleSave} style={taskItemStyles.editForm}>
           <input
             type="text"
             value={editTitle}
             onChange={(e) => setEditTitle(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
+            style={taskItemStyles.editInput}
             required
           />
           
@@ -87,15 +88,15 @@ const TaskItem = ({ task }) => {
             value={editDescription}
             onChange={(e) => setEditDescription(e.target.value)}
             rows="2"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+            style={taskItemStyles.editTextarea}
             placeholder="Add description..."
           />
 
-          <div className="grid grid-cols-2 gap-3">
+          <div style={taskItemStyles.editGrid}>
             <select
               value={editCategory}
               onChange={(e) => setEditCategory(e.target.value)}
-              className="px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              style={taskItemStyles.editSelect}
             >
               <option value="personal">Personal</option>
               <option value="work">Work</option>
@@ -107,7 +108,7 @@ const TaskItem = ({ task }) => {
             <select
               value={editPriority}
               onChange={(e) => setEditPriority(e.target.value)}
-              className="px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              style={taskItemStyles.editSelect}
             >
               <option value="low">Low</option>
               <option value="medium">Medium</option>
@@ -119,21 +120,24 @@ const TaskItem = ({ task }) => {
             type="date"
             value={editDeadline}
             onChange={(e) => setEditDeadline(e.target.value)}
-            className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            style={taskItemStyles.editInput}
           />
 
-          <div className="flex justify-end space-x-2">
+          <div style={taskItemStyles.editButtonContainer}>
             <button
               type="button"
               onClick={() => setIsEditing(false)}
-              className="px-3 py-1 text-sm text-gray-600 hover:text-gray-800"
+              style={taskItemStyles.editCancelBtn}
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700 disabled:opacity-50"
+              style={{
+                ...taskItemStyles.editSaveBtn,
+                opacity: loading ? 0.5 : 1
+              }}
             >
               {loading ? 'Saving...' : 'Save'}
             </button>
@@ -143,58 +147,207 @@ const TaskItem = ({ task }) => {
     );
   }
 
+  const borderColor = task.isCompleted ? '#16a34a' : '#2c3e50';
+  const opacity = task.isCompleted ? 0.75 : 1;
+
   return (
-    <div className={`bg-white p-4 rounded-lg shadow border-l-4 ${
-      task.isCompleted ? 'border-green-500 opacity-75' : 'border-indigo-500'
-    }`}>
-      <div className="flex items-start justify-between">
-        <div className="flex items-start space-x-3 flex-1">
+    <div style={{...taskItemStyles.card, borderLeftColor: borderColor, opacity: opacity}}>
+      <div style={taskItemStyles.cardContent}>
+        <div style={taskItemStyles.checkboxContainer}>
           <input
             type="checkbox"
             checked={task.isCompleted}
             onChange={() => toggleTaskCompletion(task.id, task.isCompleted)}
-            className="mt-1 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+            style={taskItemStyles.checkbox}
           />
-          <div className="flex-1">
-            <h3 className={`font-medium ${task.isCompleted ? 'line-through text-gray-500' : 'text-gray-900'}`}>
+          <div style={taskItemStyles.taskInfo}>
+            <h3 style={{
+              ...taskItemStyles.taskTitle,
+              textDecoration: task.isCompleted ? 'line-through' : 'none',
+              color: task.isCompleted ? '#9ca3af' : '#1f2937'
+            }}>
               {task.title}
             </h3>
             {task.description && (
-              <p className="text-sm text-gray-600 mt-1">{task.description}</p>
+              <p style={taskItemStyles.taskDescription}>{task.description}</p>
             )}
-            <div className="flex flex-wrap gap-2 mt-2">
-              <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(task.category)}`}>
+            <div style={taskItemStyles.badgeContainer}>
+              <span style={{...taskItemStyles.badge, ...getCategoryStyle(task.category)}}>
                 {task.category}
               </span>
-              <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(task.priority)}`}>
+              <span style={{...taskItemStyles.badge, ...getPriorityStyle(task.priority)}}>
                 {task.priority}
               </span>
-              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                📅 {formatDate(task.deadline)}
+              <span style={{...taskItemStyles.badge, backgroundColor: '#f3f4f6', color: '#374151'}}>
+                 {formatDate(task.deadline)}
               </span>
             </div>
           </div>
         </div>
         
-        <div className="flex space-x-2 ml-4">
+        <div style={taskItemStyles.buttonGroup}>
           <button
             onClick={() => setIsEditing(true)}
-            className="text-indigo-600 hover:text-indigo-800 p-1"
+            style={taskItemStyles.editBtn}
             title="Edit task"
           >
-            ✏️
+            <Pencil color='#6b7280' size={20}/>
           </button>
           <button
             onClick={handleDelete}
-            className="text-red-600 hover:text-red-800 p-1"
+            style={taskItemStyles.deleteBtn}
             title="Delete task"
           >
-            🗑️
+            <X color='#6b7280' size={20}/>
           </button>
         </div>
       </div>
     </div>
   );
+};
+
+const taskItemStyles = {
+  card: {
+    backgroundColor: '#ffffff',
+    padding: '1rem',
+    borderRadius: '0',
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+    borderLeft: '4px solid',
+    transition: 'opacity 0.2s',
+  },
+  cardContent: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    gap: '1rem',
+  },
+  checkboxContainer: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    gap: '0.75rem',
+    flex: 1,
+  },
+  checkbox: {
+    marginTop: '0.25rem',
+    width: '1rem',
+    height: '1rem',
+    cursor: 'pointer',
+    accentColor: '#2c3e50',
+  },
+  taskInfo: {
+    flex: 1,
+  },
+  taskTitle: {
+    fontWeight: '500',
+    margin: 0,
+    marginBottom: '0.25rem',
+    fontSize: '0.95rem',
+  },
+  taskDescription: {
+    fontSize: '0.875rem',
+    color: '#6b7280',
+    margin: '0.25rem 0',
+  },
+  badgeContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '0.5rem',
+    marginTop: '0.5rem',
+  },
+  badge: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    padding: '0.25rem 0.5rem',
+    borderRadius: '9999px',
+    fontSize: '0.75rem',
+    fontWeight: '500',
+  },
+  buttonGroup: {
+    display: 'flex',
+    gap: '0.5rem',
+    marginLeft: '1rem',
+  },
+  editBtn: {
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    fontSize: '1.1rem',
+    padding: '0.25rem',
+    transition: 'opacity 0.2s',
+  },
+  deleteBtn: {
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    fontSize: '1.1rem',
+    padding: '0.25rem',
+    transition: 'opacity 0.2s',
+  },
+  editingCard: {
+    backgroundColor: '#ffffff',
+    padding: '1rem',
+    borderRadius: '0.375rem',
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+    border: '2px solid #bfdbfe',
+  },
+  editForm: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.75rem',
+  },
+  editInput: {
+    padding: '0.5rem 0.75rem',
+    border: '1px solid #d1d5db',
+    borderRadius: '0.375rem',
+    fontSize: '0.875rem',
+    fontFamily: 'inherit',
+    transition: 'border-color 0.2s',
+  },
+  editTextarea: {
+    padding: '0.5rem 0.75rem',
+    border: '1px solid #d1d5db',
+    borderRadius: '0.375rem',
+    fontSize: '0.875rem',
+    fontFamily: 'inherit',
+    resize: 'vertical',
+    transition: 'border-color 0.2s',
+  },
+  editSelect: {
+    padding: '0.25rem 0.5rem',
+    border: '1px solid #d1d5db',
+    borderRadius: '0.25rem',
+    fontSize: '0.875rem',
+    fontFamily: 'inherit',
+  },
+  editGrid: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '0.75rem',
+  },
+  editButtonContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    gap: '0.5rem',
+  },
+  editCancelBtn: {
+    padding: '0.25rem 0.75rem',
+    fontSize: '0.875rem',
+    color: '#4b5563',
+    backgroundColor: 'transparent',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'color 0.2s',
+  },
+  editSaveBtn: {
+    padding: '0.25rem 0.75rem',
+    fontSize: '0.875rem',
+    color: '#ffffff',
+    backgroundColor: '#2c3e50',
+    border: 'none',
+    borderRadius: '0.375rem',
+    cursor: 'pointer',
+    transition: 'background-color 0.2s',
+  },
 };
 
 export default TaskItem;

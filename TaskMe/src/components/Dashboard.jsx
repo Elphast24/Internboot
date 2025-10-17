@@ -16,18 +16,18 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <h1 className="text-xl font-semibold">Task Manager</h1>
+    <div style={styles.container}>
+      <nav style={styles.nav}>
+        <div style={styles.navContent}>
+          <div style={styles.navFlex}>
+            <div style={styles.navLeft}>
+              <h1 style={styles.navTitle}>Task Manager</h1>
             </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-gray-700">Welcome, {currentUser?.email}</span>
+            <div style={styles.navRight}>
+              <span style={styles.userEmail}>Welcome, {currentUser?.email}</span>
               <button
                 onClick={handleLogout}
-                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm"
+                style={styles.logoutBtn}
               >
                 Logout
               </button>
@@ -36,27 +36,27 @@ const Dashboard = () => {
         </div>
       </nav>
 
-      <main className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="px-4 sm:px-0">
+      <main style={styles.main}>
+        <div style={styles.mainContent}>
           {/* Header and Add Task Button */}
-          <div className="flex justify-between items-center mb-6">
+          <div style={styles.headerSection}>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">My Tasks</h2>
-              <p className="text-gray-600">Manage your daily tasks efficiently</p>
+              <h2 style={styles.pageTitle}>My Tasks</h2>
+              <p style={styles.pageSubtitle}>Manage your daily tasks efficiently</p>
             </div>
             <button
               onClick={() => setShowTaskForm(true)}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md flex items-center space-x-2"
+              style={styles.addTaskBtn}
             >
               <span>+</span>
-              <span>Add Task</span>
+              <span style={styles.addTaskText}>Add Task</span>
             </button>
           </div>
 
           {/* Task Form Modal */}
           {showTaskForm && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-              <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div style={styles.modalOverlay}>
+              <div style={styles.modalContent}>
                 <TaskForm onCancel={() => setShowTaskForm(false)} />
               </div>
             </div>
@@ -68,6 +68,125 @@ const Dashboard = () => {
       </main>
     </div>
   );
+};
+
+const styles = {
+  container: {
+    minHeight: '100vh',
+    backgroundColor: '#f5f5f5',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  },
+  nav: {
+    backgroundColor: '#ffffff',
+    borderBottom: '1px solid #e0e0e0',
+  },
+  navContent: {
+    maxWidth: '100%',
+    margin: '0 auto',
+    paddingLeft: '1.5rem',
+    paddingRight: '1.5rem',
+  },
+  navFlex: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: '4rem',
+  },
+  navLeft: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  navTitle: {
+    fontSize: '1.25rem',
+    fontWeight: '600',
+    margin: 0,
+    color: '#1f2937',
+  },
+  navRight: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1.5rem',
+  },
+  userEmail: {
+    color: '#4b5563',
+    fontSize: '0.95rem',
+  },
+  logoutBtn: {
+    backgroundColor: '#2c3e50',
+    color: '#ffffff',
+    border: 'none',
+    padding: '0.5rem 1rem',
+    borderRadius: '0.375rem',
+    fontSize: '0.875rem',
+    cursor: 'pointer',
+    fontWeight: '500',
+    transition: 'background-color 0.2s ease',
+  },
+  main: {
+    maxWidth: '56rem',
+    margin: '0 auto',
+    paddingTop: '1.5rem',
+    paddingBottom: '1.5rem',
+  },
+  mainContent: {
+    paddingLeft: '1rem',
+    paddingRight: '1rem',
+  },
+  headerSection: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '1.5rem',
+  },
+  pageTitle: {
+    fontSize: '1.875rem',
+    fontWeight: '700',
+    margin: 0,
+    color: '#1f2937',
+  },
+  pageSubtitle: {
+    fontSize: '0.95rem',
+    color: '#6b7280',
+    margin: '0.25rem 0 0 0',
+  },
+  addTaskBtn: {
+    backgroundColor: '#2c3e50',
+    color: '#ffffff',
+    border: 'none',
+    padding: '0.5rem 1rem',
+    borderRadius: '0.375rem',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    fontSize: '0.95rem',
+    fontWeight: '500',
+    transition: 'background-color 0.2s ease',
+  },
+  addTaskText: {
+    display: 'inline-block',
+  },
+  modalOverlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '1rem',
+    zIndex: 50,
+  },
+  modalContent: {
+    backgroundColor: '#ffffff',
+    borderRadius: '0.5rem',
+    maxWidth: '28rem',
+    width: '100%',
+    maxHeight: '90vh',
+    overflowY: 'auto',
+  },
 };
 
 export default Dashboard;
