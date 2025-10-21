@@ -1,0 +1,119 @@
+.applications-container {
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .applications-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .applications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 20px;
+  }
+  
+  .application-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #007bff;
+  }
+  
+  .application-card.rejected {
+    border-left-color: #dc3545;
+  }
+  
+  .application-card.accepted {
+    border-left-color: #28a745;
+  }
+  
+  .application-job-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  .application-company {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .application-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .application-status {
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  
+  .status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .status-reviewed {
+    background-color: #cfe2ff;
+    color: #084298;
+  }
+  
+  .status-shortlisted {
+    background-color: #d1e7dd;
+    color: #0f5132;
+  }
+  
+  .status-accepted {
+    background-color: #d1e7dd;
+    color: #0f5132;
+  }
+  
+  .status-rejected {
+    background-color: #f8d7da;
+    color: #842029;
+  }
+  
+  .application-date {
+    font-size: 12px;
+    color: #999;
+  }
+  
+  .application-location {
+    color: #666;
+    font-size: 14px;
+    margin: 10px 0;
+  }
+  
+  .no-applications {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+    font-size: 18px;
+  }
+  
+  @media (max-width: 768px) {
+    .applications-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .application-info {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }

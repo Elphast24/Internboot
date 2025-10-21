@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { authAPI } from '../utils/api';
 import '../styles/auth.css';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = ({ onLoginSuccess }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -30,6 +32,7 @@ const LoginForm = ({ onLoginSuccess }) => {
       localStorage.setItem('user', JSON.stringify(user));
 
       onLoginSuccess(user);
+      navigate('/jobs');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     } finally {

@@ -9,12 +9,16 @@ import Navbar from './components/Navbar';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import JobList from './components/JobList';
-import PostJob from './components/PostJob';
 import JobDetail from './components/JobDetail';
+import PostJob from './components/PostJob';
 import MyApplications from './components/MyApplication';
+import ApplicationForm from './components/ApplicationForm';
+import MyJobs from './components/MyJobs';
+import EmployerDashboard from './pages/EmployerDashboard';
 import './index.css';
 
 function App() {
+  // const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -29,6 +33,7 @@ function App() {
 
   const handleLoginSuccess = (userData) => {
     setUser(userData);
+    // navigate('/jobs');
   };
 
   const handleLogout = () => {
@@ -41,57 +46,60 @@ function App() {
 
   return (
     <Router>
-      <Navbar user={user} onLogout={handleLogout} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '90vh' }}>
-              <h1 style={{ fontSize: '6rem'}}>Welcome to Jobb</h1>
-              <p>Find your dream job or hire top talent</p>
-              {!user && (
-                <div style={{ marginTop: '20px' }}>
-                  <a href="/login" className="btn btn-primary">
-                    Login
-                  </a>
-                  <a href="/signup" className="btn btn-primary" style={{ marginLeft: '10px' }}>
-                    Sign Up
-                  </a>
-                </div>
-              )}
-            </div>
-          }
-        />
+    <Navbar user={user} onLogout={handleLogout} />
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '90vh' }}>
+            <h1 style={{ fontSize: '6rem'}}>Welcome to Jobb</h1>
+            <p>Find your dream job or hire top talent</p>
+            {!user && (
+              <div style={{ marginTop: '20px' }}>
+                <a href="/login" className="btn btn-primary">
+                  Login
+                </a>
+                <a href="/signup" className="btn btn-primary" style={{ marginLeft: '10px' }}>
+                  Sign Up
+                </a>
+              </div>
+            )}
+          </div>
+        }
+      />
+
+      <Route path='/login' element={<LoginForm onLoginSuccess={handleLoginSuccess}/>}/>
+      <Route path='/signup' element={<SignupForm onSignupSuccess={handleLoginSuccess}/>}/>
 
         <Route
-          path="/signup"
+          path="/auth"
           element={
             user ? (
               <Navigate to="/jobs" />
             ) : (
               <div>
+                {new URLSearchParams(window.location.search).get('mode') ===
+                'signup' ? (
                   <SignupForm onSignupSuccess={handleLoginSuccess} />
-              </div>
-            )
-          }
-        />
-
-<Route
-          path="/login"
-          element={
-            user ? (
-              <Navigate to="/jobs" />
-            ) : (
-              <div>
+                ) : (
                   <LoginForm onLoginSuccess={handleLoginSuccess} />
+                )}
               </div>
             )
           }
         />
-
-        <Route path="/jobs/:id" element={<JobDetail user={user} />} />
 
         <Route path="/jobs" element={<JobList user={user} />} />
+
+        <Route
+          path="/jobs/:id"
+          element={<JobDetail user={user} />}
+        />
+
+        <Route
+          path="/apply/:id"
+          element={user ? <ApplicationForm user={user} /> : <Navigate to="/auth?mode=login" />}
+        />
 
         <Route
           path="/post-job"
@@ -99,10 +107,37 @@ function App() {
         />
 
         <Route
+          path="/post-job/:id"
+          element={user ? <PostJob user={user} /> : <Navigate to="/auth" />}
+        />
+
+        <Route
+          path="/my-jobs"
+          element={
+            user && user.role === 'employer' ? (
+              <MyJobs user={user} />
+            ) : (
+              <Navigate to="/jobs" />
+            )
+          }
+        />
+
+        <Route
           path="/my-applications"
           element={
             user && user.role === 'job_seeker' ? (
               <MyApplications />
+            ) : (
+              <Navigate to="/jobs" />
+            )
+          }
+        />
+
+        <Route
+          path="/employer-dashboard"
+          element={
+            user && user.role === 'employer' ? (
+              <EmployerDashboard user={user} />
             ) : (
               <Navigate to="/jobs" />
             )

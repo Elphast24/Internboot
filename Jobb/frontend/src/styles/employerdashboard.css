@@ -1,0 +1,183 @@
+.employer-dashboard-container {
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .dashboard-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .job-applications-section {
+    margin-bottom: 40px;
+  }
+  
+  .job-section-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #007bff;
+  }
+  
+  .applicants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+  }
+  
+  .applicant-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #007bff;
+  }
+  
+  .applicant-card.accepted {
+    border-top-color: #28a745;
+  }
+  
+  .applicant-card.rejected {
+    border-top-color: #dc3545;
+  }
+  
+  .applicant-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .applicant-contact {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  
+  .applicant-contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .applicant-contact-item span {
+    margin-right: 5px;
+  }
+  
+  .job-applied {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 15px 0;
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .job-applied-title {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .application-status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+  }
+  
+  .status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .status-reviewed {
+    background-color: #cfe2ff;
+    color: #084298;
+  }
+  
+  .status-shortlisted {
+    background-color: #d1e7dd;
+    color: #0f5132;
+  }
+  
+  .status-accepted {
+    background-color: #d1e7dd;
+    color: #0f5132;
+  }
+  
+  .status-rejected {
+    background-color: #f8d7da;
+    color: #842029;
+  }
+  
+  .applicant-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+  }
+  
+  .applicant-actions button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .action-btn-accept {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .action-btn-accept:hover {
+    background-color: #218838;
+  }
+  
+  .action-btn-reject {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .action-btn-reject:hover {
+    background-color: #c82333;
+  }
+  
+  .action-btn-shortlist {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .action-btn-shortlist:hover {
+    background-color: #0056b3;
+  }
+  
+  .no-applications-message {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  @media (max-width: 768px) {
+    .applicants-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .applicant-actions {
+      flex-direction: column;
+    }
+  }
