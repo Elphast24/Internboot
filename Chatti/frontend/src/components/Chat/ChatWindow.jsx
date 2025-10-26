@@ -3,9 +3,8 @@ import axios from '../../utils/axios';
 import { useSocket } from '../../context/SocketContext';
 import Message from './Message';
 import MessageInput from './MessageInput';
-import logo from '../../assets/chatti.png'
 
-const ChatWindow = ({ chat, user }) => {
+const ChatWindow = ({ chat, user, onBack, showChat }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [typing, setTyping] = useState(false);
@@ -106,27 +105,40 @@ const ChatWindow = ({ chat, user }) => {
     return otherUser?.name || 'Unknown User';
   };
 
+  const getChatAvatar = () => {
+    if (chat.isGroupChat) {
+      return chat.groupAvatar || 'https://api.dicebear.com/9.x/initials/svg?seed=' + encodeURIComponent(chat.chatName);
+    }
+    const otherUser = chat.users.find((u) => u._id !== user._id);
+    return otherUser?.avatar || 'https://api.dicebear.com/9.x/avataaars/svg?seed=Unknown';
+  };
+
   if (!chat) {
     return (
-      <div className="chat-window-empty">
-        <div className="auth-logo" >
-          <img src={logo} alt="Chatti Logo"/>
+      <div className={`chat-window ${showChat ? 'chat-window-visible' : 'chat-window-hidden'}`}>
+        <div className="chat-window-empty">
+          <h2>Welcome to Chat App</h2>
+          <p>Select a chat to start messaging</p>
         </div>
-        <h2>Welcome to Chatti</h2>
-        <p>Select a chat to start messaging</p>
       </div>
     );
   }
 
   return (
-    <div className="chat-window">
+    <div className={`chat-window ${showChat ? 'chat-window-visible' : 'chat-window-hidden'}`}>
       <div className="chat-header">
-        <h3>{getChatName()}</h3>
-        {chat.isGroupChat && (
-          <span className="group-members">
-            {chat.users.length} members
-          </span>
-        )}
+        <button className="btn-back" onClick={onBack}>
+          ← Back
+        </button>
+        <img src={getChatAvatar()} alt={getChatName()} className="chat-header-avatar" />
+        <div className="chat-header-info">
+          <h3>{getChatName()}</h3>
+          {chat.isGroupChat && (
+            <span className="group-members">
+              {chat.users.length} members
+            </span>
+          )}
+        </div>
       </div>
 
       <div className="messages-container">
