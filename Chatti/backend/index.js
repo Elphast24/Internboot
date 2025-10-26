@@ -48,7 +48,7 @@ const io = new Server(server, {
   pingTimeout: 60000,
   cors: {
     origin: process.env.NODE_ENV === 'production' 
-      ? 'http://localhost:5173' 
+      ? 'https://chatti-csxs.onrender.com' 
       : 'http://localhost:3000',
     credentials: true,
   },
