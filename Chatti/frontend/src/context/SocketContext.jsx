@@ -16,7 +16,7 @@ export const SocketProvider = ({ children }) => {
 
     if (userInfo) {
       const newSocket = io(
-        import.meta.env.REACT_APP_SOCKET_URL || 'http://localhost:5000'
+        import.meta.env.VITE_API_URI || 'http://localhost:5000'
       );
       
       setSocket(newSocket);
