@@ -1,7 +1,5 @@
-import React from 'react';
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import io from 'socket.io-client';
-import { useAuth } from './AuthContext';
 
 const SocketContext = createContext();
 
@@ -11,36 +9,30 @@ export const useSocket = () => {
 
 export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
-  const { currentUser } = useAuth();
+  const [onlineUsers, setOnlineUsers] = useState([]);
 
   useEffect(() => {
-    if (currentUser) {
-      const newSocket = io('http://localhost:5000', {
-        transports: ['websocket', 'polling']
-      });
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
-      newSocket.emit('setup', currentUser);
+    if (userInfo) {
+      const newSocket = io(
+        import.meta.env.REACT_APP_SOCKET_URL || 'http://localhost:5000'
+      );
       
-      newSocket.on('connected', () => {
-        console.log('Connected to server');
-      });
-
       setSocket(newSocket);
 
-      return () => {
-        newSocket.close();
-      };
-    } else {
-      if (socket) {
-        socket.close();
-        setSocket(null);
-      }
+      newSocket.emit('setup', userInfo);
+
+      return () => newSocket.close();
     }
-  }, [currentUser]);
+  }, []);
+
+  const value = {
+    socket,
+    onlineUsers,
+  };
 
   return (
-    <SocketContext.Provider value={socket}>
-      {children}
-    </SocketContext.Provider>
+    <SocketContext.Provider value={value}>{children}</SocketContext.Provider>
   );
 };
