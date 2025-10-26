@@ -641,3 +641,144 @@
 .search-results::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chat-container {
+    height: 100vh;
+    border-radius: 0;
+    position: relative;
+  }
+
+  .sidebar {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    transition: transform 0.3s ease-in-out;
+    left: 0;
+  }
+
+  .sidebar-hidden {
+    transform: translateX(-100%);
+  }
+
+  .sidebar-visible {
+    transform: translateX(0);
+  }
+
+  .chat-window {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    transition: transform 0.3s ease-in-out;
+    right: 0;
+  }
+
+  .chat-window-hidden {
+    transform: translateX(100%);
+  }
+
+  .chat-window-visible {
+    transform: translateX(0);
+  }
+
+  /* Back button for mobile */
+  .btn-back {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px 12px;
+    font-weight: 600;
+  }
+
+  .chat-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .chat-header-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .chat-header-info {
+    flex: 1;
+  }
+
+  .chat-header-info h3 {
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .message-content {
+    max-width: 80%;
+  }
+
+  .message-image img {
+    max-width: 200px;
+  }
+}
+
+/* Desktop - hide back button */
+@media (min-width: 769px) {
+  .btn-back {
+    display: none;
+  }
+
+  .sidebar {
+    width: 350px;
+  }
+
+  .chat-window {
+    flex: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: 0;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .sidebar-header {
+    padding: 15px;
+  }
+
+  .user-info h3 {
+    font-size: 14px;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .message-content {
+    max-width: 85%;
+  }
+
+  .message-text {
+    font-size: 14px;
+  }
+
+  .message-image img {
+    max-width: 150px;
+  }
+
+  .btn-back {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+}
