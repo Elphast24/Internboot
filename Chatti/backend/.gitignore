@@ -109,3 +109,10 @@ build/
 # MongoDB
 data/db/
 *.mongod
+
+
+# Manual Cleaning
+# .gitignore (in root)
+TaskMe/
+Ecommerce/
+GhanaFlavors/
