@@ -12,6 +12,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [showLogin, setShowLogin] = useState(true);
   const [selectedChat, setSelectedChat] = useState(null);
+  const [showSidebar, setShowSidebar] = useState(true);
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -19,6 +20,24 @@ function App() {
       setUser(userInfo);
     }
   }, []);
+
+  // Handle chat selection - hide sidebar on mobile
+  const handleSelectChat = (chat) => {
+    setSelectedChat(chat);
+    // Hide sidebar on mobile when chat is selected
+    if (window.innerWidth <= 768) {
+      setShowSidebar(false);
+    }
+  };
+
+  // Handle back to chats - show sidebar on mobile
+  const handleBackToChats = () => {
+    setShowSidebar(true);
+    // Optionally deselect chat on mobile
+    if (window.innerWidth <= 768) {
+      setSelectedChat(null);
+    }
+  };
 
   const handleLoginSuccess = (userData) => {
     setUser(userData);
@@ -28,6 +47,7 @@ function App() {
     localStorage.removeItem('userInfo');
     setUser(null);
     setSelectedChat(null);
+    setShowSidebar(true);
   };
 
   if (!user) {
@@ -54,11 +74,17 @@ function App() {
         <div className="chat-container">
           <Sidebar
             user={user}
-            onSelectChat={setSelectedChat}
+            onSelectChat={handleSelectChat}
             onLogout={handleLogout}
             selectedChat={selectedChat}
+            showSidebar={showSidebar}
           />
-          <ChatWindow chat={selectedChat} user={user} />
+          <ChatWindow 
+            chat={selectedChat} 
+            user={user}
+            onBack={handleBackToChats}
+            showChat={!showSidebar || window.innerWidth > 768}
+          />
         </div>
       </div>
     </SocketProvider>
