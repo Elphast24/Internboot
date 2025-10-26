@@ -282,11 +282,20 @@
   background: #21D0C3;
   color: white;
   border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  /* justify-content: center; */
 }
 
 .chat-header h3 {
   font-size: 18px;
   margin-bottom: 4px;
+}
+
+.chat-header img {
+  border-radius: 100%;
+  max-width: 45px;
 }
 
 .group-members {
