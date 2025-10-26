@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   const getApi = () => {
     const token = localStorage.getItem('token');
     const api = axios.create({
-      baseURL: 'http://localhost:5000/api',
+      baseURL: `{import.meta.env.VITE_API_URI}/api`,
     });
 
     if (token) {
