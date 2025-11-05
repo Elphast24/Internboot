@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../redux/slices/authSlice';
 import './Navbar.css';
+import {BaggageClaim, Store} from 'lucide-react'
 
 const Navbar = () => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
@@ -29,7 +30,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          🛒 ShopHub
+          <BaggageClaim/> ShopHub
         </Link>
 
         <ul className="navbar-menu">
@@ -75,7 +76,7 @@ const Navbar = () => {
           {/* SELLER AUTH */}
           {sellerToken ? (
             <>
-              <span className="user-info">🏪 {seller?.shopName}</span>
+              <span className="user-info"><Store/> {seller?.shopName}</span>
               <button onClick={handleSellerLogout} className="logout-btn">
                 Seller Logout
               </button>

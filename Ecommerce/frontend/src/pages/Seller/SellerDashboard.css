@@ -19,8 +19,15 @@
   
   .seller-info {
     display: flex;
+    align-items: center;
     gap: 20px;
     font-size: 14px;
+  }
+
+  .seller-info p{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
   }
   
   .dashboard-stats {

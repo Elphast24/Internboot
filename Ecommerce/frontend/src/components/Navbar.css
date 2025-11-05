@@ -80,6 +80,9 @@
 .user-info {
   font-size: 14px;
   color: #ddd;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .login-link,

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SellerDashboard.css';
+import { Mail, Smartphone, Star } from 'lucide-react';
 
 const SellerDashboard = () => {
   const [seller, setSeller] = useState(null);
@@ -51,8 +52,8 @@ const SellerDashboard = () => {
       <div className="dashboard-header">
         <h1>Welcome, {seller?.shopName}</h1>
         <div className="seller-info">
-          <p>📧 {seller?.email}</p>
-          <p>📱 {seller?.phone}</p>
+          <p><Mail/> {seller?.email}</p>
+          <p><Smartphone/> {seller?.phone}</p>
         </div>
       </div>
 
@@ -67,7 +68,7 @@ const SellerDashboard = () => {
         </div>
         <div className="stat-card">
           <h3>Shop Rating</h3>
-          <p className="stat-value">⭐ {seller?.rating || 0}</p>
+          <p className="stat-value"><Star/> {seller?.rating || 0}</p>
         </div>
       </div>
 
