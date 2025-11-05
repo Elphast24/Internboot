@@ -1,0 +1,87 @@
+.payment-result-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  .payment-result-box {
+    background: white;
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 500px;
+  }
+  
+  .icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: bold;
+  }
+  
+  .success .icon {
+    background-color: #d4edda;
+    color: #28a745;
+  }
+  
+  .cancel .icon {
+    background-color: #f8d7da;
+    color: #dc3545;
+  }
+  
+  .payment-result-box h1 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .payment-result-box p {
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .order-id {
+    font-weight: bold;
+    color: #667eea;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    justify-content: center;
+  }
+  
+  .actions button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .actions button:first-child {
+    background-color: #667eea;
+    color: white;
+  }
+  
+  .actions button:last-child {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  .actions button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }

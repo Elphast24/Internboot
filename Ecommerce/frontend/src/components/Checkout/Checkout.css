@@ -1,0 +1,132 @@
+.checkout-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  .checkout-content {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
+    margin-top: 20px;
+  }
+  
+  .checkout-form-section,
+  .order-summary-section {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .checkout-form-section h2 {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 24px;
+  }
+  
+  .order-summary-section h3 {
+    color: #333;
+    margin-top: 0;
+    font-size: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+    font-size: 14px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.3s;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+  }
+  
+  .form-group input:disabled {
+    background-color: #f5f5f5;
+    color: #999;
+  }
+  
+  .place-order-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #667eea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .place-order-btn:hover:not(:disabled) {
+    background-color: #764ba2;
+  }
+  
+  .place-order-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  .summary-items {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+  }
+  
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .summary-divider {
+    height: 2px;
+    background-color: #667eea;
+    margin: 15px 0;
+  }
+  
+  .summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .payment-note {
+    font-size: 12px;
+    color: #999;
+    margin: 0;
+    font-style: italic;
+  }
+  
+  @media (max-width: 768px) {
+    .checkout-content {
+      grid-template-columns: 1fr;
+    }
+  }

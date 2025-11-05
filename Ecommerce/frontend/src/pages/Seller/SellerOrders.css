@@ -1,0 +1,144 @@
+.seller-orders {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .seller-orders h1 {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 32px;
+  }
+  
+  .filter-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+  }
+  
+  .filter-options button {
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+  }
+  
+  .filter-options button:hover,
+  .filter-options button.active {
+    background-color: #667eea;
+    color: white;
+    border-color: #667eea;
+  }
+  
+  .orders-table {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .table-header {
+    display: grid;
+    grid-template-columns: 1.2fr 1.2fr 1fr 1fr 1fr 1fr 1.5fr;
+    gap: 15px;
+    background-color: #f5f5f5;
+    padding: 15px;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  .table-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1.2fr 1fr 1fr 1fr 1fr 1.5fr;
+    gap: 15px;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+  }
+  
+  .table-row:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .order-id {
+    color: #667eea;
+    font-weight: bold;
+  }
+  
+  .status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .status.pending {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .status.confirmed {
+    background-color: #cfe2ff;
+    color: #084298;
+  }
+  
+  .status.shipped {
+    background-color: #d1ecf1;
+    color: #0c5460;
+  }
+  
+  .status.delivered {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .payment {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .payment.pending {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .payment.paid {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .status-select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+  
+  .actions button {
+    padding: 8px 15px;
+    background-color: #667eea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .actions button:hover {
+    background-color: #764ba2;
+  }

@@ -1,0 +1,153 @@
+.order-history-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  .order-history-container h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .loading,
+  .no-orders {
+    text-align: center;
+    color: #999;
+    padding: 40px;
+    font-size: 16px;
+  }
+  
+  .orders-table {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .table-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    background-color: #f5f5f5;
+    padding: 15px;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  .table-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s;
+  }
+  
+  .table-row:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .order-id {
+    color: #667eea;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .order-date {
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .order-items {
+    color: #666;
+  }
+  
+  .user-order-total {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .order-status,
+  .payment-status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .status-confirmed {
+    background-color: #cfe2ff;
+    color: #084298;
+  }
+  
+  .status-shipped {
+    background-color: #d1ecf1;
+    color: #0c5460;
+  }
+  
+  .status-delivered {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .status-cancelled {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .status-paid {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .status-failed {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  @media (max-width: 1024px) {
+    .table-header,
+    .table-row {
+      grid-template-columns: 1.2fr 1fr 1fr 1.2fr;
+    }
+  
+    .order-items {
+      display: none;
+    }
+  
+    .table-header div:nth-child(3),
+    .table-row div:nth-child(3) {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .table-header,
+    .table-row {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  
+    .order-id,
+    .order-date,
+    .order-total {
+      font-size: 12px;
+    }
+  
+    .order-status,
+    .payment-status {
+      padding: 4px 8px;
+      font-size: 10px;
+    }
+  }
