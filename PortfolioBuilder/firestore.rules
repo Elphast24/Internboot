@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Profiles collection
+    match /profiles/{userId} {
+      // Anyone can read profiles (for public portfolio viewing)
+      allow read: if true;
+      
+      // Only the profile owner can create or update their profile
+      allow create, update: if request.auth != null && request.auth.uid == userId;
+      
+      // Only the profile owner can delete their profile
+      allow delete: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Projects collection
+    match /projects/{projectId} {
+      // Anyone can read projects (for public portfolio viewing)
+      allow read: if true;
+      
+      // Only authenticated users can create projects
+      allow create: if request.auth != null 
+                    && request.resource.data.userId == request.auth.uid;
+      
+      // Only the project owner can update or delete their projects
+      allow update, delete: if request.auth != null 
+                              && resource.data.userId == request.auth.uid;
+    }
+  }
+}

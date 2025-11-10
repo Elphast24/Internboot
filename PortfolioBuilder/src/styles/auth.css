@@ -1,0 +1,138 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  .auth-box {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 420px;
+  }
+  
+  .auth-box h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  
+  .auth-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 14px;
+  }
+  
+  .auth-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  
+  .auth-tabs button {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.3s;
+  }
+  
+  .auth-tabs button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  .auth-tabs button.active {
+    background: #667eea;
+    border-color: #667eea;
+    color: white;
+  }
+  
+  .auth-tabs button:not(.active):hover:not(:disabled) {
+    border-color: #667eea;
+    color: #667eea;
+  }
+  
+  .form-field {
+    margin-bottom: 16px;
+  }
+  
+  .form-field input {
+    margin-bottom: 4px;
+  }
+  
+  .divider {
+    text-align: center;
+    margin: 24px 0;
+    color: #999;
+    font-size: 13px;
+    position: relative;
+  }
+  
+  .divider::before,
+  .divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: #e0e0e0;
+  }
+  
+  .divider::before {
+    left: 0;
+  }
+  
+  .divider::after {
+    right: 0;
+  }
+  
+  .btn-google {
+    width: 100%;
+    padding: 14px;
+    background: white;
+    color: #333;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s;
+  }
+  
+  .btn-google:hover:not(:disabled) {
+    border-color: #667eea;
+    color: #667eea;
+  }
+  
+  .btn-google:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  @media (max-width: 480px) {
+    .auth-box {
+      padding: 30px 24px;
+    }
+    
+    .auth-box h1 {
+      font-size: 24px;
+    }
+  }
