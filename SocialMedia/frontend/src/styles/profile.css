@@ -1,0 +1,143 @@
+.profile-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  
+  .profile-header {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+  
+  .profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #1877f2;
+  }
+  
+  .profile-info {
+    flex: 1;
+  }
+  
+  .profile-top {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .profile-top h1 {
+    font-size: 2rem;
+    margin: 0;
+  }
+  
+  .profile-stats {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .profile-stats div {
+    font-size: 1rem;
+  }
+  
+  .profile-stats strong {
+    font-weight: 700;
+    margin-right: 0.25rem;
+  }
+  
+  .profile-bio {
+    color: #65676b;
+    line-height: 1.5;
+  }
+  
+  .profile-posts {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-posts h2 {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e4e6eb;
+  }
+  
+  .no-posts {
+    text-align: center;
+    color: #65676b;
+    padding: 2rem;
+  }
+  
+  .edit-profile-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  
+  .edit-profile-container h1 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .edit-profile-form {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-picture-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .preview-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #1877f2;
+  }
+  
+  .change-picture-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #1877f2;
+    color: #fff;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .change-picture-btn:hover {
+    background-color: #166fe5;
+  }
+  
+  .char-count {
+    font-size: 0.875rem;
+    color: #65676b;
+    text-align: right;
+    display: block;
+    margin-top: 0.25rem;
+  }
+  
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+  }
+  
