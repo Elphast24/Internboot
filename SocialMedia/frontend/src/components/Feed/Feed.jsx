@@ -16,13 +16,21 @@ const Feed = () => {
   const fetchPosts = async () => {
     try {
       const { data } = await API.get(`/posts/feed?page=${page}`);
-      setPosts(prev => page === 1 ? data : [...prev, ...data]);
+      const fetchedPosts = Array.isArray(data)
+        ? data
+        : Array.isArray(data.posts)
+        ? data.posts
+        : [];
+  
+      setPosts(prev => (page === 1 ? fetchedPosts : [...prev, ...fetchedPosts]));
     } catch (err) {
       console.error('Error fetching posts:', err);
+      setPosts([]); // fallback to empty array
     } finally {
       setLoading(false);
     }
   };
+  
 
   const handlePostCreated = (newPost) => {
     setPosts([newPost, ...posts]);
