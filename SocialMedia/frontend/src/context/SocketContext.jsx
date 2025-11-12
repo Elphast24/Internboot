@@ -11,7 +11,7 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      const newSocket = io(import.meta.env.REACT_APP_API_URL || 'http://localhost:5000');
+      const newSocket = io(import.meta.env.VITE_REACT_APP_API_URI);
       setSocket(newSocket);
 
       newSocket.emit('user:online', user.id);
