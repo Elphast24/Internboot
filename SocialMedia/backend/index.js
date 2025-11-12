@@ -9,9 +9,14 @@ const socketHandler = require('./socket/socketHandler');
 
 const app = express();
 const server = http.createServer(app);
+const allowedOrigins = [
+  process.env.CLIENT_URL,          // e.g., https://social-4abf.onrender.com
+  "http://localhost:5173"          // for local dev
+].filter(Boolean); // remove undefined values
+
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin: allowedOrigins,
     credentials: true,
   },
 });
