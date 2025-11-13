@@ -33,6 +33,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/posts', require('./routes/posts'));
+app.use('/api/chats', require('./routes/chat'));
+app.use('/api/notifications', require('./routes/notifications'));
+
+// 404 handler for undefined routes
+// app.use('/*', (req, res) => {
+//   res.status(404).json({ 
+//     error: 'Route not found',
+//     availableRoutes: [
+//       '/api/auth',
+//       '/api/users',
+//       '/api/posts',
+//       '/api/chats',
+//       '/api/notifications'
+//     ]
+//   });
+// });
 
 // Health check
 app.get('/health', (req, res) => {
